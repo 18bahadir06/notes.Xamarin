@@ -13,7 +13,6 @@ namespace notes
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PasswordPage : ContentPage
     {
-        private readonly Database _database;
         public PasswordPage()
         {
             InitializeComponent();
@@ -21,7 +20,7 @@ namespace notes
         private async void OnLoginClicked(object sender, EventArgs e)
         {
             string p = PasswordEntry.Text.ToString();
-            if (_database.GetPasswordControl(p)==true)
+            if (await App.database.GetPasswordControl(p)==true)
             {
                 await Navigation.PushAsync(new MainPage(new Database(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "notes.db3"))));
             }

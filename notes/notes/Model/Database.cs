@@ -28,20 +28,14 @@ namespace notes.Model
             }
             else
             {
+                p.IdUser = 1;
                 return _database.InsertAsync(p);
             }
         }
-        public bool GetPasswordControl(string p)
+        public async Task<bool> GetPasswordControl(string p)
         {
-            var a = _database.Table<Password>().Where(x => x.MyPassword == p);
-            if (a != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            } 
+            var a = await _database.Table<Password>().FirstOrDefaultAsync(x=>x.MyPassword==p);
+            return a != null;
         }
         public Task<List<Password>> GetPasswordAsync()
         {

@@ -9,17 +9,17 @@ namespace notes
 {
     public partial class App : Application
     {
+        public static Database database { get; private set; }
         public App()
         {
             InitializeComponent();
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "notes.db3");
-            Database database = new Database(dbPath);
+            database = new Database(dbPath);
             InitializeApp(database);
         }
         public async void InitializeApp(Database database)
         {
             var password = await database.GetPasswordAsync();
-
             if(password.Count==0)
             {
                 MainPage = new NavigationPage(new NewPasswordPage());
