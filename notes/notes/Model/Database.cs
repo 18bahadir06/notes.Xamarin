@@ -3,13 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using notes.Bussines;
 
 namespace notes.Model
 {
     public class Database
     {
         private readonly SQLiteAsyncConnection _database;
-
+        private readonly BussinesClass _bussinesClass;
         public Database(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
@@ -56,7 +58,7 @@ namespace notes.Model
         {
             if (notes.Id != 0)
             {
-                return _database.UpdateAsync(notes);
+                return  _database.UpdateAsync(notes);
             }
             else
             {

@@ -6,12 +6,47 @@
              BackgroundColor="DarkSlateGray">
 
     <StackLayout Padding="20">
+        <!-- Not giriş alanı -->
         <Entry x:Name="NoteEntry" Placeholder="Yeni Notunuzu yazın.." />
-        <Button Text="Not Ekle"/>
-        <ListView x:Name="NotesListView">
+
+        <!-- Not ekle butonu -->
+        <Button 
+            x:Name="NoteButton"
+            Text="Not Ekle"    
+            Clicked="OnNewNoteClicked" 
+                />
+
+        <!-- Notların listelendiği ListView -->
+        <ListView x:Name="NotesListView"
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None"
+                  BackgroundColor="Transparent">
+
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding}" />
+                    <ViewCell>
+                        <Frame HasShadow="True" 
+                               Padding="10"
+                               Margin="10"
+                               CornerRadius="10"
+                               BackgroundColor="{Binding Color}">
+                            <StackLayout>
+
+                                <!-- Not içeriği -->
+                                <Label Text="{Binding Content}"
+                                       FontSize="Medium"
+                                       TextColor="White"
+                                       HorizontalOptions="StartAndExpand" />
+
+                                <!-- Zaman bilgisi -->
+                                <Label Text="{Binding Time, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
+                                       FontSize="Small"
+                                       TextColor="LightGray"
+                                       HorizontalOptions="End" />
+
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
